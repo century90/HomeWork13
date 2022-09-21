@@ -10,6 +10,7 @@ public class ProductManagerTest {
     Book item3 = new Book(3, "книга3", 300, "Иванов И.И.");
     Smartphone item4 = new Smartphone(4, "смартфон4", 400, "Китай");
     Book item5 = new Book(5, "книга5", 500, "Сидоров С.С.");
+    Book item6 = new Book(2, "Книга2", 200, "ПЕетров П.П.");
 
     @Test
     public void shouldAddItems() {
@@ -34,6 +35,35 @@ public class ProductManagerTest {
 
         Product[] expected = {item2};
         Product[] actual = manager.searchBy("Книга2");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByItems2Positions() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        manager.add(item6);
+
+        Product[] expected = {item2, item6};
+        Product[] actual = manager.searchBy("Книга2");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByItemsNotPositions() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Книга10");
 
         Assertions.assertArrayEquals(expected, actual);
     }
