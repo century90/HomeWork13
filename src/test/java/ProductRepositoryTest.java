@@ -55,4 +55,18 @@ public class ProductRepositoryTest {
 
     }
 
+    @Test
+    public void shouldGiveError() {
+        repo.save(item1);
+        repo.save(item2);
+        repo.save(item3);
+        repo.save(item4);
+        repo.save(item5);
+
+        Assertions.assertThrows(NotFoundException.class, () -> repo.removeById(6));
+
+    }
+
+
+
 }
