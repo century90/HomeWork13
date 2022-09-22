@@ -56,7 +56,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void shouldGiveError() {
+    public void shouldGiveErrorNotFoundExceptions() {
         repo.save(item1);
         repo.save(item2);
         repo.save(item3);
@@ -64,6 +64,18 @@ public class ProductRepositoryTest {
         repo.save(item5);
 
         Assertions.assertThrows(NotFoundException.class, () -> repo.removeById(6));
+
+    }
+
+    @Test
+    public void shouldGiveErrorAlreadyExistsException() {
+        repo.save(item1);
+        repo.save(item2);
+        repo.save(item3);
+        repo.save(item4);
+        repo.save(item5);
+
+        Assertions.assertThrows(AlreadyExistsException.class, () -> repo.save(item1));
 
     }
 

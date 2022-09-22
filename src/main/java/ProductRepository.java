@@ -4,6 +4,10 @@ public class ProductRepository {
 
 
     public Product[] save(Product item) {
+        if (findById(item.id) == item) {
+            throw new AlreadyExistsException(item.id);
+        }
+
         Product[] tmp = new Product[items.length + 1];
 
         for (int i = 0; i < items.length; i++) {
